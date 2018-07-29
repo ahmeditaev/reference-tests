@@ -8,11 +8,17 @@ describe('payload', function () {
 
   it('car quantity with owners older than 20 years', function () {
 
-    let answer;
+    var answer = 0;
 
-    /**
-     * you code here
-     */
+    var data = payload.data;
+    
+    data.forEach(function (item, i, data) {
+      if (item.owners === 1 && item.owners[i].personalInfo.age > 20) {
+        answer += 1;
+      }
+    });
+
+    return answer;
 
     assert.equal(answer, 2);
 
@@ -20,11 +26,19 @@ describe('payload', function () {
 
   it('all car colors separated by comma without duplicates', function () {
 
-    let answer;
+    var data = payload.data;
+    var answer = [];
+    data.forEach(function (item) {
+       answer.push(item.attrs.colors);
+    });
+    answer.forEach(function (item) {
+       if (answer.indexOf(item) < 0) {
+         answer.push(item);
+       }
+    });
 
-    /**
-     * you code here
-     */
+    return answer;
+
 
     assert.equal(answer, 'red,yellow');
 
